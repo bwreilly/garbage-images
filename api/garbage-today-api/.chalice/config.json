@@ -1,0 +1,5 @@
+{
+  "lambda_arn": "arn:aws:lambda:us-west-1:724115019134:function:garbage-today-api", 
+  "app_name": "garbage-today-api", 
+  "stage": "dev"
+}
