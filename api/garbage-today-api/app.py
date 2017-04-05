@@ -1,6 +1,7 @@
 from chalice import Chalice
 
 from chalicelib.models import Post
+from chalicelib.serializers import ImageResultSchema
 from chalicelib import connection  # init global connection
 
 app = Chalice(app_name="garbage-today-api")
@@ -11,8 +12,10 @@ def search():
     """
     Basic search endpoint 
     """
-    s = Post.search().execute()
-    return s.to_dict()
+    posts = Post.search().execute().hits
+    schema = ImageResultSchema(many=True)
+    results = schema.dump(posts)
+    return results.data
 
 
 @app.route("/complete")

@@ -1,5 +1,6 @@
 from elasticsearch_dsl import DocType, Text, Completion, Keyword, Date, Boolean, datetime, Index
 
+
 ES_INDEX = 'images'
 
 
