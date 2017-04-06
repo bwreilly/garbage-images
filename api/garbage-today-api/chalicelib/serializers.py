@@ -10,3 +10,5 @@ class ImageResultSchema(Schema):
     published = fields.Boolean()
 
 
+class AutoCompleteSchema(Schema):
+    text = fields.Str()
