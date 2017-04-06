@@ -28,3 +28,4 @@ class Post(DocType):
 
 index = Index(ES_INDEX)
 index.doc_type(Post)
+

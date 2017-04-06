@@ -1,4 +1,5 @@
 from chalice import Chalice
+from elasticsearch_dsl import Q
 
 from chalicelib.models import Post
 from chalicelib.serializers import ImageResultSchema, AutoCompleteSchema
@@ -13,8 +14,9 @@ def search(term):
     """
     Basic search endpoint 
     """
-    # TODO: actually use that term, why not?
-    posts = Post.search().execute().hits
+    query = Q("multi_match", query=term, fields=['title', 'tags'], zero_terms_query='all')
+    s = Post.search()
+    posts = s.query(query).execute().hits
     schema = ImageResultSchema(many=True)
     results = schema.dump(posts)
     return results.data
