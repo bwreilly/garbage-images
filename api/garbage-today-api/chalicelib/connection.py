@@ -16,3 +16,5 @@ connections.create_connection(hosts=[{'host': ES_HOST, 'port': 443}],
                               verify_certs=True,
                               connection_class=RequestsHttpConnection,
                               http_auth=auth, timeout=20)
+
+default = connections.get_connection('default')

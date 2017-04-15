@@ -23,7 +23,7 @@ class Post(DocType):
 
     def save(self, ** kwargs):
         self.created_at = datetime.now()
-        return super(DocType, self).save(**kwargs)
+        return super(Post, self).save(**kwargs)
 
 
 index = Index(ES_INDEX)
