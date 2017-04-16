@@ -12,3 +12,4 @@ class ImageResultSchema(Schema):
 
 class AutoCompleteSchema(Schema):
     text = fields.Str()
+    result = fields.Nested(ImageResultSchema(), attribute='_source')
