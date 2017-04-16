@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Autosuggest from 'react-autosuggest';
 import logo from './logo.svg';
 import './App.css';
 
@@ -44,6 +45,8 @@ class SearchForm extends Component {
     });
   };
 
+  getSuggestionValue = suggestion => suggestion.text;
+
   onSuggestionsFetchRequested = ({ value }) => {
     const url = this.autocomplete;
     fetch(`${url}${value}`)
@@ -55,12 +58,37 @@ class SearchForm extends Component {
         if (Array.isArray(data)) {
           this.setState({suggestions: data});
         }
-      })
+      });
   };
 
+  onSuggestionsClearRequested = () => {
+    this.setState({
+      suggestions: []
+    });
+  };
+
+  renderSuggestion = suggestion => (
+    <div>
+      {suggestion.text}
+    </div>
+  );
+
   render() {
+    const { value, suggestions } = this.state;
+    const inputProps = {
+      placeholder: 'Search',
+      value,
+      onChange: this.onChange
+    };
     return (
-      <div />
+      <Autosuggest
+        suggestions={suggestions}
+        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+        getSuggestionValue={this.getSuggestionValue}
+        renderSuggestion={this.renderSuggestion}
+        inputProps={inputProps}
+      />
     )
   }
 }
