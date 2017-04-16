@@ -23,21 +23,29 @@ def index_file(event, _):
 
     print("Received event: " + json.dumps(event, indent=2))
 
+    key_name = urllib.unquote_plus(event['Records'][0]['s3']['object']['key'].encode('utf8'))
+    bucket_name = event['Records'][0]['s3']['bucket']['name']
+
+    post = index(key_name, bucket_name)
+
+    return "Indexed post: " + json.dumps(post.to_dict(), indent=2)
+
+
+def index(key, bucket):
     from connection import default
     from models import Post
 
-    key_name = urllib.unquote_plus(event['Records'][0]['s3']['object']['key'].encode('utf8'))
-    bucket_name = event['Records'][0]['s3']['bucket']['name']
-    # TODO: grab metadata
-
-    print(default)
-
-    name = os.path.splitext(key_name)[0]
+    name, ext = os.path.splitext(key)
     tags = name.split('-')
     domain = settings.AWS_CLOUDFRONT_DOMAIN
-    url = urlparse.urljoin('https://' + domain, key_name)
-    post = Post(name=name, tags=tags, image_url=url)
+    url = urlparse.urljoin('https://' + domain, key)
+    post = Post(name=name, tags=tags, image_url=url, image_type=ext)
+
+    # TODO: grab metadata
 
     # overwrite identical files
-    post.meta.id = get_hash(key_name, bucket_name)
+    post.meta.id = get_hash(key, bucket)
+
+    # TODO: this is gonna replace the image data rather than merge it, which is probably closer to what I want
     post.save(using=default)
+    return post

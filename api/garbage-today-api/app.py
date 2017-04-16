@@ -14,9 +14,12 @@ def search(term):
     """
     Basic search endpoint 
     """
-    query = Q("multi_match", query=term, fields=['title', 'tags'], zero_terms_query='all')
     s = Post.search()
-    posts = s.query(query).execute().hits
+
+    term = term or '*'
+    query = Q("multi_match", query=term, fields=['name', 'tags'], zero_terms_query='all')
+    s = s.query(query)
+    posts = s.execute().hits
     schema = ImageResultSchema(many=True)
     results = schema.dump(posts)
     return results.data

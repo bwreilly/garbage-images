@@ -1,0 +1,22 @@
+{
+  "name": "garbage-today",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "flow-bin": "^0.44.0",
+    "react-scripts": "0.9.5"
+  },
+  "dependencies": {
+    "react": "^15.5.4",
+    "react-autosuggest": "^9.0.0",
+    "react-dom": "^15.5.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "flow": "flow"
+  },
+  "proxy": "https://iibg6hc573.execute-api.us-west-1.amazonaws.com"
+}

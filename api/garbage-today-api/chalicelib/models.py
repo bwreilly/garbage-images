@@ -9,12 +9,12 @@ class Post(DocType):
     class Meta:
         index = ES_INDEX
 
-    title = Text()
+    name = Text()
     tags = Text(
         multi=True,
         fields={'raw': Keyword(multi=True)}
     )
-    autosuggest = Completion()
+    autosuggest = Completion(analyzer='simple', payloads=True)
     created_at = Date()
     image_type = Text()
     image_url = Text()
