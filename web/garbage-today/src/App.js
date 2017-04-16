@@ -35,7 +35,8 @@ class SearchForm extends Component {
     this.autocomplete = `/dev/complete/`;
     this.state = {
       value: '',
-      suggestions: []
+      suggestions: [],
+      result: null
     }
   }
 
@@ -69,26 +70,36 @@ class SearchForm extends Component {
 
   renderSuggestion = suggestion => (
     <div>
-      {suggestion.text}
+      <div>{suggestion.result.tags.join(', ')}</div>
+      <img src={suggestion.result.image_url} />
     </div>
   );
 
+  onSuggestionSelected = (event, suggestion) => (
+    this.setState({result: suggestion.result.image_url})
+  )
+
   render() {
-    const { value, suggestions } = this.state;
+    const { value, suggestions, result } = this.state;
     const inputProps = {
       placeholder: 'Search',
       value,
       onChange: this.onChange
     };
     return (
-      <Autosuggest
-        suggestions={suggestions}
-        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-        getSuggestionValue={this.getSuggestionValue}
-        renderSuggestion={this.renderSuggestion}
-        inputProps={inputProps}
-      />
+      <div>
+        <Autosuggest
+          alwaysRenderSuggestions={true}
+          // onSuggestionSelected={this.onSuggestionSelected}
+          suggestions={suggestions}
+          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+          getSuggestionValue={this.getSuggestionValue}
+          renderSuggestion={this.renderSuggestion}
+          inputProps={inputProps}
+        />
+        <img src={result} />
+      </div>
     )
   }
 }
