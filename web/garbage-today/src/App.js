@@ -50,12 +50,12 @@ class SearchForm extends Component {
 
   onSuggestionsFetchRequested = ({ value }) => {
     const url = this.autocomplete;
+    // TODO: This needs a debounce
     fetch(`${url}${value}`)
       .then((response) => {
         return response.json();
       })
       .then((data) => {
-        // TODO: always return an array or a real error
         if (Array.isArray(data)) {
           this.setState({suggestions: data});
         }
@@ -71,7 +71,7 @@ class SearchForm extends Component {
   renderSuggestion = suggestion => (
     <div className="Result">
       <div>{suggestion.result.tags.join(', ')}</div>
-      <img className="Image"
+      <img className="Image-preview"
            src={suggestion.result.image_url}
            alt={suggestion.result.name} />
     </div>

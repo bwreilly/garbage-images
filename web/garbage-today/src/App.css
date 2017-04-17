@@ -22,6 +22,10 @@
 
 }
 
+ul {
+  list-style-type: none;
+}
+
 .Search-input {
   width: 90%;
   height: 1em;
@@ -30,8 +34,12 @@
   padding: 1em;
 }
 
-.Image {
+.Image-preview {
   max-height: 20em;
+}
+
+.Image-main {
+  max-height: 50em;
 }
 
 @keyframes App-logo-spin {

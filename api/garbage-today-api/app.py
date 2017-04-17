@@ -9,6 +9,8 @@ from chalicelib import connection  # init global connection
 app = Chalice(app_name="garbage-today-api")
 
 
+# TODO: always return an array or a real error
+
 @app.route("/search/{term}")
 def search(term):
     """
@@ -30,9 +32,8 @@ def complete(term):
     """
     Autocomplete 
     """
-    # get suggestions
     s = Post.search()
-    completion = {'field': 'autosuggest'}
+    completion = {'field': 'autosuggest', 'size': 10}
     response = s.suggest('suggest', term, completion=completion).execute_suggest()
     result = response.suggest[0]
     suggestions = result.options
