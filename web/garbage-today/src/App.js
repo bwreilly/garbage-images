@@ -69,9 +69,11 @@ class SearchForm extends Component {
   };
 
   renderSuggestion = suggestion => (
-    <div>
+    <div className="Result">
       <div>{suggestion.result.tags.join(', ')}</div>
-      <img src={suggestion.result.image_url} />
+      <img className="Image"
+           src={suggestion.result.image_url}
+           alt={suggestion.result.name} />
     </div>
   );
 
@@ -84,7 +86,8 @@ class SearchForm extends Component {
     const inputProps = {
       placeholder: 'Search',
       value,
-      onChange: this.onChange
+      onChange: this.onChange,
+      className: 'Search-input'
     };
     return (
       <div>

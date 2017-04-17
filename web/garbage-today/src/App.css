@@ -18,6 +18,22 @@
   font-size: large;
 }
 
+.Result {
+
+}
+
+.Search-input {
+  width: 90%;
+  height: 1em;
+  font-size: larger;
+  margin: 1em;
+  padding: 1em;
+}
+
+.Image {
+  max-height: 20em;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
