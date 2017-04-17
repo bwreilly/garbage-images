@@ -2,16 +2,9 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
 .App-header {
-  background-color: #222;
-  height: 150px;
+  height: 90px;
   padding: 20px;
-  color: white;
 }
 
 .App-intro {
@@ -22,16 +15,29 @@
 
 }
 
+.Logo {
+  width: 4em;
+  float: left;
+}
+
+
 ul {
   list-style-type: none;
 }
 
 .Search-input {
-  width: 90%;
+  width: 100%;
+  max-width: 70%;
   height: 1em;
   font-size: larger;
   margin: 1em;
   padding: 1em;
+}
+
+.Copy-field {
+  width: 100%;
+  max-width: 70%;
+  font-size: larger;
 }
 
 .Image-preview {

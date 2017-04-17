@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Autosuggest from 'react-autosuggest';
-import logo from './logo.svg';
+import logo from './logo.png';
 import './App.css';
 
 
@@ -9,7 +9,10 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <h2>Garbage, today!</h2>
+          <span>
+            <img className='Logo' src={logo} />
+            <h1>Garbage, today!</h1>
+          </span>
         </div>
         <Search />
       </div>
@@ -22,7 +25,6 @@ class Search extends Component {
     return (
       <div>
         <SearchForm />
-        <SearchResults />
       </div>
     )
   }
@@ -77,9 +79,13 @@ class SearchForm extends Component {
     </div>
   );
 
-  onSuggestionSelected = (event, suggestion) => (
+  onSuggestionSelected = (e, {suggestion}) => (
     this.setState({result: suggestion.result.image_url})
   )
+
+  onFocus = e => {
+    this.setState({result: null})
+  }
 
   render() {
     const { value, suggestions, result } = this.state;
@@ -87,13 +93,13 @@ class SearchForm extends Component {
       placeholder: 'Search',
       value,
       onChange: this.onChange,
+      onFocus: this.onFocus,
       className: 'Search-input'
     };
     return (
       <div>
         <Autosuggest
-          alwaysRenderSuggestions={true}
-          // onSuggestionSelected={this.onSuggestionSelected}
+          onSuggestionSelected={this.onSuggestionSelected}
           suggestions={suggestions}
           onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
           onSuggestionsClearRequested={this.onSuggestionsClearRequested}
@@ -101,25 +107,34 @@ class SearchForm extends Component {
           renderSuggestion={this.renderSuggestion}
           inputProps={inputProps}
         />
-        <img src={result} />
+        <Result result={result} />
       </div>
     )
   }
 }
 
-class SearchResults extends Component {
-  render() {
-    return (
-      <div />
-    )
-  }
-}
-
 class Result extends Component {
+
+  select(e) {
+    e.target.select();
+  }
+
   render() {
-    return (
-      <div />
-    )
+    if (this.props.result) {
+      return (
+        <div>
+          <img src={this.props.result} />
+          <input
+            autoFocus={true}
+            onFocus={this.select}
+            className='Copy-field'
+            type="text"
+            value={this.props.result} />
+        </div>
+      )
+    } else {
+      return null;
+    }
   }
 }
 
