@@ -4,19 +4,19 @@ from elasticsearch_dsl import Q
 from chalicelib.models import Post
 from chalicelib.serializers import ImageResultSchema, AutoCompleteSchema
 
-from chalicelib import connection  # init global connection
+from chalicelib.connection import default
 
 app = Chalice(app_name="garbage-today-api")
 
 
 # TODO: always return an array or a real error
 
-@app.route("/search/{term}")
+@app.route("/search/{term}", cors=True)
 def search(term):
     """
     Basic search endpoint 
     """
-    s = Post.search()
+    s = Post.search(using=default)
 
     term = term or '*'
     query = Q("multi_match", query=term, fields=['name', 'tags'], zero_terms_query='all')
@@ -27,13 +27,13 @@ def search(term):
     return results.data
 
 
-@app.route("/complete/{term}")
+@app.route("/complete/{term}", cors=True)
 def complete(term):
     """
     Autocomplete 
     """
-    s = Post.search()
-    completion = {'field': 'autosuggest', 'size': 10}
+    s = Post.search(using=default)
+    completion = {'field': 'autosuggest', 'size': 20}
     response = s.suggest('suggest', term, completion=completion).execute_suggest()
     result = response.suggest[0]
     suggestions = result.options
@@ -51,7 +51,7 @@ def home():
     """
     # TODO: can we get app.routes without a circular import?
     return {
-        '/': 'This page (index)',
-        'search/{term}': 'Posts',
-        'complete/{term}': 'Autocomplete'
+        'This page (index)': '/',
+        'Posts': 'search/{term}',
+        'Autocomplete': 'complete/{term}'
     }

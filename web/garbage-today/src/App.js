@@ -15,8 +15,22 @@ class App extends Component {
           </span>
         </div>
         <Search />
+        <Footer />
       </div>
     );
+  }
+}
+
+class Footer extends Component {
+  render() {
+    const small = {fontSize: 'small'}
+    return (
+      <footer className='Footer'>
+        <span style={small}>
+          <a href='mailto:admin@garbage.today'>Contact</a> for attribution/takedown requests.
+        </span>
+      </footer>
+    )
   }
 }
 
@@ -33,13 +47,12 @@ class Search extends Component {
 class SearchForm extends Component {
   constructor(props) {
     super(props);
-    this.url = `/dev/search/`;  // TODO: we get a _source in /complete, so this is superfluous
-    this.autocomplete = `/dev/complete/`;
+    this.autocomplete = `https://iibg6hc573.execute-api.us-west-1.amazonaws.com/dev/complete/`;
     this.state = {
       value: '',
       suggestions: [],
       result: null
-    }
+    };
   }
 
   onChange = (event, { newValue }) => {
@@ -51,8 +64,9 @@ class SearchForm extends Component {
   getSuggestionValue = suggestion => suggestion.text;
 
   onSuggestionsFetchRequested = ({ value }) => {
+    // TODO: debounce, yes
+    this.onSuggestionsClearRequested();
     const url = this.autocomplete;
-    // TODO: This needs a debounce
     fetch(`${url}${value}`)
       .then((response) => {
         return response.json();
@@ -71,7 +85,7 @@ class SearchForm extends Component {
   };
 
   renderSuggestion = suggestion => (
-    <div className="Result">
+    <div className="Result" id={suggestion.result.name}>
       <div>{suggestion.result.tags.join(', ')}</div>
       <img className="Image-preview"
            src={suggestion.result.image_url}

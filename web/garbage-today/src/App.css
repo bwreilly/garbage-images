@@ -34,6 +34,13 @@ ul {
   padding: 1em;
 }
 
+.Footer {
+  position: fixed;
+  bottom: 1em;
+  text-align: center;
+  width: 100%;
+}
+
 .Copy-field {
   width: 100%;
   max-width: 70%;

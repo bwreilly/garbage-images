@@ -1,6 +1,6 @@
 from aws_requests_auth.aws_auth import AWSRequestsAuth
-from elasticsearch import RequestsHttpConnection
-from elasticsearch_dsl.connections import connections
+from elasticsearch import RequestsHttpConnection, Elasticsearch
+# from elasticsearch_dsl.connections import connections
 
 from settings import *
 
@@ -11,10 +11,8 @@ auth = AWSRequestsAuth(aws_access_key=AWS_ACCESS_KEY,
                        aws_region='us-west-1',
                        aws_service='es')
 
-connections.create_connection(hosts=[{'host': ES_HOST, 'port': 443}],
-                              use_ssl=True,
-                              verify_certs=True,
-                              connection_class=RequestsHttpConnection,
-                              http_auth=auth, timeout=20)
-
-default = connections.get_connection('default')
+default = Elasticsearch(hosts=[{'host': ES_HOST, 'port': 443}],
+                        use_ssl=True,
+                        verify_certs=True,
+                        connection_class=RequestsHttpConnection,
+                        http_auth=auth, timeout=20)

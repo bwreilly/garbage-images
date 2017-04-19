@@ -26,9 +26,10 @@ def index_file(event, _):
     key_name = urllib.unquote_plus(event['Records'][0]['s3']['object']['key'].encode('utf8'))
     bucket_name = event['Records'][0]['s3']['bucket']['name']
 
-    post = index(key_name, bucket_name)
+    post, success = index(key_name, bucket_name)
 
-    return "Indexed post: " + json.dumps(post.to_dict(), indent=2)
+    print("Indexed post - Name: {0}, id: {1} ".format(post.name, post.meta.id))
+    return success
 
 
 def index(key, bucket):
@@ -39,7 +40,8 @@ def index(key, bucket):
     tags = name.split('-')
     domain = settings.AWS_CLOUDFRONT_DOMAIN
     url = urlparse.urljoin('https://' + domain, key)
-    post = Post(name=name, tags=tags, image_url=url, image_type=ext)
+    post = Post(name=name, tags=tags, image_url=url,
+                image_type=ext, autosuggest=tags)
 
     # TODO: grab metadata
 
@@ -47,5 +49,6 @@ def index(key, bucket):
     post.meta.id = get_hash(key, bucket)
 
     # TODO: this is gonna replace the image data rather than merge it, which is probably closer to what I want
-    post.save(using=default)
-    return post
+    success = post.save(using=default)
+    print('Successful? ' + str(success))
+    return post, success

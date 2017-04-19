@@ -21,7 +21,7 @@ class Post(DocType):
 
     published = Boolean()
 
-    def save(self, ** kwargs):
+    def save(self, **kwargs):
         self.created_at = datetime.now()
         return super(Post, self).save(**kwargs)
 
