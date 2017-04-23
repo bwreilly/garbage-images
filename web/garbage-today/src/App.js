@@ -27,7 +27,7 @@ class Footer extends Component {
     return (
       <footer className='Footer'>
         <span style={small}>
-          <a href='mailto:admin@garbage.today'>Contact</a> for attribution/takedown requests.
+          <a href='mailto:admin@garbage.today'>Contact</a> for submissions and attribution/takedown requests.
         </span>
       </footer>
     )

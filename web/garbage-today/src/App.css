@@ -37,8 +37,10 @@ ul {
 .Footer {
   position: fixed;
   bottom: 1em;
+  height: 1em;
   text-align: center;
   width: 100%;
+  background-color: white;
 }
 
 .Copy-field {

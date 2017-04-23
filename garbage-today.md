@@ -5,9 +5,10 @@
 1. I have all these images on all these computers
 2. Constantly trying to find a good one for my purposes
 3. Existing solutions suck for search, sorry
-	- imgur fails to find my image for `arcade river game` and gives me garbage for `old computer`
+	- imgur fails to find my image for `arcade river game` and gives me trash for `old computer`
 	- giffy only does gifs and it's search is much worse and it's slow as fuck
 	- I'm better at curating this than most of the internet apparently
+	- I don't trust any of you (Dropbox, Google Photos, et al)
 4. What this is replacing (image of me using alfred)
 5. Because I can
 
@@ -35,7 +36,7 @@ This is how I made [garbage.today](https://garbage.today)
 - Made a really basic indexer function in Lambda
 - Made an S3 bucket that fires events to that indexer
 - Hooked up an ElasticSearch service
-- Wrote the worlds simplest/dumbest SPA with `create-react-app`
+- Wrote the world's simplest/dumbest SPA with `create-react-app`
 
 ### The bad
 
