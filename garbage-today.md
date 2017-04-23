@@ -6,14 +6,13 @@
 2. Constantly trying to find a good one for my purposes
 3. Existing solutions suck for search, sorry
 	- imgur fails to find my image for `arcade river game` and gives me trash for `old computer`
-	- giffy only does gifs and it's search is much worse and it's slow as fuck
+	- giffy only does gifs and it's search is much worse and it's slow as heck
 	- I'm better at curating this than most of the internet apparently
 	- I don't trust any of you (Dropbox, Google Photos, et al)
-4. What this is replacing (image of me using alfred)
-5. Because I can
+4. Because I can
 
-## New tools for lazy application developers 
-	
+## New tools for lazy application developers
+
 Back before we had these platform services, speedily building this app would look like this.
 
 - Grab a familiar framework like Django
@@ -28,7 +27,7 @@ Back before we had these platform services, speedily building this app would loo
 	- Redis/RabbitMQ
 	- Django/WSGI
 	- Postgresql
-- Pay money 24/7 for a server that is barely in use 
+- Pay money 24/7 for a server that is barely in use
 
 This is how I made [garbage.today](https://garbage.today)
 
@@ -51,12 +50,3 @@ This could be a post in itself, but let's review the seemingly dozens of ways yo
 - Their "builder"
 
 The fact they need a simulator is a good indication that they've failed to capture user intention in the various places used to configure access rights.
-
-
-
-## TODO:
-
-- A better build system - update the whole project as needed
-- A CI that hooks into the repo and automatically tests and deploys
-- Dev/QA/Prod
-- Somehow use python 3.5+
