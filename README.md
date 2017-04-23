@@ -10,11 +10,11 @@ See garbage-today.md
 
 It's up at [https://garbage.today](https://garbage.today) for as long as I feel like.
 
-# How can I contact the extremely handsome and smart person who did this to berate them?
+## How can I contact the extremely handsome and smart person who did this to berate them?
 
 Twitter @bwreilly
 
-# TODO:
+## TODO:
 
 - Remove basically entirely unnecessary Autosuggest dependency
 - Basic debounce because it gets a little wonky if you jam out something really fast
