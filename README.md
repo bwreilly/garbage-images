@@ -8,7 +8,7 @@ See garbage-today.md
 
 ## Where
 
-It's up at [https://garbage.today](https://garbage.today) for as long as I feel like.
+It's up at [https://app.garbage.today](https://app.garbage.today) for as long as I feel like.
 
 ## How can I contact the extremely handsome and smart person who did this to berate them?
 
