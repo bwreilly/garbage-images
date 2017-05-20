@@ -132,6 +132,20 @@ class SearchForm extends Component {
   }
 }
 
+const urlParser = (url) => {
+  // creating a new unused element, that's a cool trick
+  // https://gist.github.com/jlong/2428561
+  let parser = document.createElement('a');
+  parser.href = url;
+  return parser;
+}
+
+const replaceDomain = (url, domain = 'img.garbage.today') => {
+  const parsed = urlParser(url);
+  const oldDomain = parsed.hostname;
+  return url.replace(oldDomain, domain);
+}
+
 class Result extends Component {
 
   select(e) {
@@ -140,6 +154,7 @@ class Result extends Component {
 
   render() {
     if (this.props.result) {
+      const correctedUrl = replaceDomain(this.props.result)
       return (
         <div>
           <img src={this.props.result} />
@@ -148,7 +163,7 @@ class Result extends Component {
             onFocus={this.select}
             className='Copy-field'
             type="text"
-            value={this.props.result} />
+            value={correctedUrl} />
         </div>
       )
     } else {
