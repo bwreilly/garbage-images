@@ -17,6 +17,6 @@ Twitter @bwreilly
 ## TODO:
 
 - Remove basically entirely unnecessary Autosuggest dependency
-- Basic debounce because it gets a little wonky if you jam out something really fast
+- ~~Basic debounce because it gets a little wonky if you jam out something really fast~~
 - Optimize the images
 - A dumb S3 uploader where I can shove in metadata tags
