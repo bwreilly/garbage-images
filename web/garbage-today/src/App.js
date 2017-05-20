@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Autosuggest from 'react-autosuggest';
+import _ from 'lodash';
 import logo from './logo.png';
 import './App.css';
 
@@ -53,6 +54,7 @@ class SearchForm extends Component {
       suggestions: [],
       result: null
     };
+    this.debouncedLoadSuggestions = _.debounce(this.loadSuggestions, 200);
   }
 
   onChange = (event, { newValue }) => {
@@ -63,8 +65,7 @@ class SearchForm extends Component {
 
   getSuggestionValue = suggestion => suggestion.text;
 
-  onSuggestionsFetchRequested = ({ value }) => {
-    // TODO: debounce, yes
+  loadSuggestions(value) {
     this.onSuggestionsClearRequested();
     const url = this.autocomplete;
     fetch(`${url}${value}`)
@@ -76,6 +77,10 @@ class SearchForm extends Component {
           this.setState({suggestions: data});
         }
       });
+  }
+
+  onSuggestionsFetchRequested = ({ value }) => {
+    this.debouncedLoadSuggestions(value);
   };
 
   onSuggestionsClearRequested = () => {
