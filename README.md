@@ -4,7 +4,7 @@ Simple Lambda-based serverless image host/search.
 
 ## Why?
 
-See garbage-today.md
+See garbage-today.md and https://medium.com/@bwreilly/garbage-today-an-almost-non-trivial-aws-lambda-image-search-host-89c4de85eec8
 
 ## Where
 
